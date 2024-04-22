@@ -1,7 +1,6 @@
 // App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { FaTrash } from 'react-icons/fa';
 
 function App() {
   const [groceries, setGroceries] = useState([]);
@@ -44,7 +43,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Grocery Bud</h1>
       <form onSubmit={handleFormSubmit}>
         <input type="text" value={inputValue} onChange={handleInputChange} />
         <button type="submit">Add</button>
@@ -54,7 +52,7 @@ function App() {
           <li key={index} className="grocery-item">
             <input type="checkbox" checked={grocery.checked} onChange={() => handleCheckChange(index)} />
             <span style={{ textDecoration: grocery.checked ? 'line-through' : 'none' }}>{grocery.name}</span>
-            <button onClick={() => deleteGrocery(index)}><FaTrash /></button>
+            <button onClick={() => deleteGrocery(index)}>Delete</button>
           </li>
         ))}
       </ul>

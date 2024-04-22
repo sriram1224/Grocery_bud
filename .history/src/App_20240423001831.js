@@ -1,7 +1,6 @@
 // App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { FaTrash } from 'react-icons/fa';
 
 function App() {
   const [groceries, setGroceries] = useState([]);
@@ -25,15 +24,9 @@ function App() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== '') {
-      setGroceries([...groceries, { name: inputValue.trim(), checked: false }]);
+      setGroceries([...groceries, inputValue.trim()]);
       setInputValue('');
     }
-  };
-
-  const handleCheckChange = (index) => {
-    const newGroceries = [...groceries];
-    newGroceries[index].checked = !newGroceries[index].checked;
-    setGroceries(newGroceries);
   };
 
   const deleteGrocery = (index) => {
@@ -46,15 +39,14 @@ function App() {
     <div className="App">
       <h1>Grocery Bud</h1>
       <form onSubmit={handleFormSubmit}>
-        <input type="text" value={inputValue} onChange={handleInputChange} />
-        <button type="submit">Add</button>
+        <input type="text" value={inputValue} onChange={handleInputChange} placeholder="Enter grocery item" />
+        <button type="submit">Add Grocery</button>
       </form>
       <ul>
         {groceries.map((grocery, index) => (
-          <li key={index} className="grocery-item">
-            <input type="checkbox" checked={grocery.checked} onChange={() => handleCheckChange(index)} />
-            <span style={{ textDecoration: grocery.checked ? 'line-through' : 'none' }}>{grocery.name}</span>
-            <button onClick={() => deleteGrocery(index)}><FaTrash /></button>
+          <li key={index}>
+            {grocery}
+            <button onClick={() => deleteGrocery(index)}>Delete</button>
           </li>
         ))}
       </ul>
